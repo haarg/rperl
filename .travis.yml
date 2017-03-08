@@ -89,7 +89,15 @@ before_script:
 # DEV NOTE: Alien::base v0.036 requires Test2::Suite which seems to be causing RPerl builds to error
 #    - cpanm --verbose Test2::Suite  # NEED FIX, HANGS ON TEST 7
 #    - cpanm -n Test2::Suite  # THIS SHOULD WORK???
-    - wget https://cpan.metacpan.org/authors/id/E/EX/EXODIST/Test2-Suite-0.000067.tar.gz && tar -xzf Test2-Suite-0.000067.tar.gz && cd Test2-Suite-0.000067 && cpanm --verbose --installdeps . && perl Makefile.PL && make && make test TEST_VERBOSE=1 && cd ..
+    - wget https://cpan.metacpan.org/authors/id/E/EX/EXODIST/Test2-Suite-0.000067.tar.gz
+    - tar -xzf Test2-Suite-0.000067.tar.gz
+    - cd Test2-Suite-0.000067
+    - curl https://gist.githubusercontent.com/haarg/986e9e9838bcde0fa0060f12a506f244/raw/742263b5950c2449ae36ec2039dd629a63321e7c/nopaste | patch -p1
+    - cpanm --verbose --installdeps .
+    - perl Makefile.PL
+    - make
+    - make test TEST_VERBOSE=1
+    - cd ..
 # DEV NOTE, CORRELATION #rp011: following line was not necessary until before_install & install sections added
 #    - cpanm --quiet --installdeps --notest .
     - cpanm --verbose --installdeps .
